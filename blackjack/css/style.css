@@ -1,0 +1,378 @@
+:root {
+    --background-color-dark        : #222222;
+    --text-color-light             : #F2F2F2;
+    --text-color-accent            : #3e2c2c;
+    --btn-green-background-dark    : #1b3f17;
+    --btn-green-background         : #288320;
+    --btn-green-background-hover   : #44a73b;
+    --btn-green-text               : #d5dbb6;
+    --btn-blue-background          : #206c83;
+    --btn-blue-background-hover    : #3b85a7;
+    --btn-blue-text                : #b6c9db;
+    --btn-red-background           : #832020;
+    --btn-red-background-hover     : #a73b3b;
+    --btn-red-text                 : #dbb6b6;
+    --title-color                  : #c71717;
+    --link-unvisited-color         : #e04f4f;
+    --link-visited-color           : #a05454;
+    --background-color-header      : rgb(59, 59, 59);
+    --text-color-header-link       : rgb(223, 95, 144);
+    --text-color-header-link-accent: rgb(160, 59, 93);
+}
+
+@font-face {
+    font-family: Casino;
+    src        : url(../font/Casino.ttf);
+}
+
+* {
+    margin     : 0px;
+    padding    : 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow   : hidden;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--background-color-dark);
+    color           : var(--text-color-light);
+    overflow-y      : auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.background {
+    position           : absolute;
+    width              : 100%;
+    height             : 100%;
+    background-repeat  : no-repeat;
+    background-position: center;
+    background-size    : cover;
+    filter             : blur(8px) brightness(0.4);
+    -webkit-filter     : blur(8px) brightness(0.4);
+    z-index            : 0;
+}
+
+.background-main {
+    background-image: url(../images/background_main.png);
+}
+
+.background-game {
+    background-image: url(../images/background_game.png);
+}
+
+.header {
+    width           : 100%;
+    height          : 50px;
+    z-index         : 200;
+    position        : relative;
+    background-color: var(--background-color-header);
+}
+
+.header-title {
+    font-size      : 32px;
+    text-decoration: none;
+    color          : #FFF !important;
+    margin-top     : 5px;
+    margin-left    : 12px;
+}
+
+.header-title small {
+    opacity: 0.2;
+}
+
+.header-link {
+    font-size      : 28px;
+    padding        : 4px;
+    margin-right   : 12px;
+    margin-top     : 2px;
+    border         : 0px;
+    border-radius  : 12px;
+    font-weight    : bold;
+    cursor         : pointer;
+    text-decoration: none;
+    color          : var(--text-color-header-link) !important;
+    text-shadow    : 0 1px 0 var(--text-color-accent),
+        0 2px 0 var(--text-color-header-link-accent),
+        0 3px 0 var(--text-color-header-link-accent),
+        0 4px 1px rgba(0, 0, 0, .1),
+        0 0 2px rgba(0, 0, 0, .1),
+        0 1px 2px rgba(0, 0, 0, .3),
+        0 2px 3px rgba(0, 0, 0, .2),
+        0 3px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
+}
+
+.align-left {
+    display   : block;
+    text-align: left;
+    position  : absolute;
+    left      : 0px;
+}
+
+.align-right {
+    display   : block;
+    text-align: right;
+    position  : absolute;
+    right     : 0px;
+}
+
+.content {
+    z-index : 100;
+    position: relative;
+}
+
+.text-center {
+    text-align: center;
+    width     : 100%;
+    display   : inline-block;
+}
+
+.text-muted {
+    opacity: .75;
+}
+
+.text-depth {
+    text-shadow: 0 1px 0 var(--text-color-accent),
+        0 2px 0 var(--text-color-accent),
+        0 3px 0 var(--text-color-accent),
+        0 4px 1px rgba(0, 0, 0, .1),
+        0 0 2px rgba(0, 0, 0, .1),
+        0 1px 2px rgba(0, 0, 0, .3),
+        0 2px 3px rgba(0, 0, 0, .2),
+        0 3px 10px rgba(0, 0, 0, .25),
+        0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
+}
+
+a:link {
+    color: var(--link-unvisited-color);
+}
+
+a:visited {
+    color: var(--link-visited-color);
+}
+
+.font-casino {
+    font-family: Casino;
+    color      : var(--title-color);
+}
+
+.title-big {
+    font-size: 4vw;
+}
+
+@keyframes fadeTitle {
+    0% {
+        color: var(--title-color);
+    }
+
+    50% {
+        color: #ad551b;
+    }
+
+    100% {
+        color: var(--title-color);
+    }
+}
+
+.titleColorFade {
+    -o-animation             : fadeTitle 5s ease-in-out;
+    animation                : fadeTitle 5s ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbowTitle {
+    0% {
+        color: #FF0000;
+    }
+
+    13% {
+        color: #FFa500;
+    }
+
+    25% {
+        color: #FFFF00;
+    }
+
+    38% {
+        color: #008000;
+    }
+
+    50% {
+        color: #0000FF;
+    }
+
+    63% {
+        color: #4B0082;
+    }
+
+    75% {
+        color: #EE82EE;
+    }
+
+    100% {
+        color: #FF0000;
+    }
+
+}
+
+.titleColorRainbow {
+    -o-animation             : rainbowTitle 5s ease-in-out;
+    animation                : rainbowTitle 5s ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flashTitle {
+    0% {
+        color: #ffffff;
+    }
+
+    100% {
+        color: var(--title-color);
+    }
+}
+
+.titleColorFlash {
+    -o-animation: flashTitle .6s ease-in-out;
+    animation   : flashTitle .6s ease-in-out;
+}
+
+@keyframes gamecardFadeIn {
+    0% {
+        opacity  : 0;
+        transform: scale(0);
+        filter   : blur(10px);
+    }
+
+    100% {
+        opacity  : 1;
+        transform: scale(1);
+        filter   : blur(0px);
+    }
+}
+
+.gamecard {
+    -o-animation: gamecardFadeIn .4s ease-in-out;
+    animation   : gamecardFadeIn .4s ease-in-out;
+}
+
+.btn {
+    margin-left  : auto;
+    margin-right : auto;
+    display      : block;
+    padding      : 8px;
+    border       : 0px;
+    border-radius: 12px;
+    font-size    : 30px;
+    font-weight  : bold;
+    cursor       : pointer;
+    opacity      : 0;
+}
+
+.btn-center {
+    margin-left : auto;
+    margin-right: auto;
+    display     : block;
+}
+
+.btn-play {
+    background-color: var(--btn-green-background-dark);
+    color           : var(--btn-green-text);
+}
+
+.btn-play:hover {
+    background-color: var(--btn-green-background-hover);
+    color           : var(--btn-green-text);
+}
+
+.btn-play-show {
+    opacity         : 1;
+    background-color: var(--btn-green-background);
+}
+
+.btn-primary {
+    background-color: var(--btn-blue-background);
+    color           : var(--btn-blue-text);
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-blue-background-hover);
+    color           : var(--btn-blue-text);
+}
+
+.btn-danger {
+    background-color: var(--btn-red-background);
+    color           : var(--btn-red-text);
+}
+
+.btn-danger:hover {
+    background-color: var(--btn-red-background-hover);
+    color           : var(--btn-red-text);
+}
+
+.btn-success {
+    background-color: var(--btn-green-background);
+    color           : var(--btn-green-text);
+}
+
+.btn-success:hover {
+    background-color: var(--btn-green-background-hover);
+    color           : var(--btn-green-text);
+}
+
+.btn-animation {
+    transition: opacity .5s, background-color .5s;
+}
+
+.btngroup {
+    width       : fit-content;
+    margin-left : auto;
+    margin-right: auto;
+    margin-top  : 15px;
+}
+
+.btngroup-btn {
+    padding      : 8px;
+    border       : 0px;
+    border-radius: 12px;
+    font-size    : 30px;
+    font-weight  : bold;
+    cursor       : pointer;
+    width        : 160px;
+}
+
+.card-holder {
+    display     : flex;
+    margin-left : auto;
+    margin-right: auto;
+    width       : 450px;
+    transform   : translate(30px, 0px);
+}
+
+.card-holder span {
+    margin-left : -40px;
+    margin-right: 60px;
+    margin-top  : 8px;
+    font-size   : 30px;
+    font-weight : bold;
+    text-align  : right;
+    width       : 45px;
+    z-index     : 100;
+    color       : #746213;
+    text-shadow : 0px 1px 0px #d4d63d,
+        0px -1px 0px #d4d63d,
+        -1px 0px 0px #d4d63d,
+        1px 0px 0px #d4d63d,
+        1px 1px 0px #d4d63d,
+        -1px 1px 0px #d4d63d,
+        -1px -1px 0px #d4d63d,
+        1px -1px 0px #d4d63d
+}
