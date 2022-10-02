@@ -125,8 +125,9 @@ body {
 }
 
 .content {
-    z-index : 100;
-    position: relative;
+    z-index       : 100;
+    position      : relative;
+    padding-bottom: 25px;
 }
 
 .text-center {
@@ -248,13 +249,13 @@ a:visited {
 @keyframes gamecardFadeIn {
     0% {
         opacity  : 0;
-        transform: scale(0);
+        transform: scale(0) rotate(90deg);
         filter   : blur(10px);
     }
 
     100% {
         opacity  : 1;
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
         filter   : blur(0px);
     }
 }
@@ -274,7 +275,12 @@ a:visited {
     font-size    : 30px;
     font-weight  : bold;
     cursor       : pointer;
+    transform    : scale(1.0);
     opacity      : 0;
+}
+
+.btn:hover {
+    transform: scale(1.2) rotate(8deg);
 }
 
 .btn-center {
@@ -329,14 +335,16 @@ a:visited {
 }
 
 .btn-animation {
-    transition: opacity .5s, background-color .5s;
+    transition: opacity .5s, background-color .5s, transform .15s;
 }
 
 .btngroup {
-    width       : fit-content;
-    margin-left : auto;
-    margin-right: auto;
-    margin-top  : 15px;
+    width        : fit-content;
+    margin-left  : auto;
+    margin-right : auto;
+    margin-top   : -15px;
+    margin-bottom: -15px;
+    padding      : 15px;
 }
 
 .btngroup-btn {
@@ -347,6 +355,10 @@ a:visited {
     font-weight  : bold;
     cursor       : pointer;
     width        : 160px;
+}
+
+.btngroup-btn:hover {
+    transform: scale(1.05);
 }
 
 .card-holder {
@@ -445,20 +457,39 @@ a:visited {
     box-shadow        : 0px 3px 2px 5px #4d1313;
 }
 
+@keyframes popupBetFade {
+    0% {
+        margin-top: 50px;
+        transform: scale(0) rotate(35deg) rotateX(90deg);
+    }
+
+    80% {
+        margin-top: 0px;
+        transform: scale(1) rotate(0deg) rotateX(0deg);
+    }
+
+    100% {
+        margin-top: -15px;
+    }
+}
+
 .popup-bet {
-    background-color: #333;
+    background-color: #423b2aa3;
+    box-shadow      : 0px 0px 5px 5px #2d281b;
+    border          : 8px solid #423b2a;
     padding         : 30px;
-    border-radius   : 8px;
-    box-shadow      : 0px 0px 5px 5px #222;
+    border-radius   : 22px;
     text-align      : center;
+    -o-animation    : popupBetFade .45s ease-in-out;
+    animation       : popupBetFade .45s ease-in-out;
 }
 
 .popup-bet input[type=number] {
+    background-color: #333;
+    color           : #DDD;
+    border          : 2px solid #3c3c3c;
     padding         : 8px;
     font-size       : 18px;
     font-weight     : bold;
     border-radius   : 50px;
-    background-color: #4f4f4f;
-    color           : #FFF;
-    border          : 2px solid #959595;
 }

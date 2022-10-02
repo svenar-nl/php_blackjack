@@ -64,14 +64,14 @@ $game->setup();
             <input type="text" name="blackjack" value="1" class="hidden" />
             <?php if ($game->has_game_ended() == true) : ?>
                 <?php if ($game->get_money() > 0) : ?>
-                    <input type="submit" name="tryagain" class="btngroup-btn btn-success" value="TryAgain" />
+                    <input type="submit" name="tryagain" class="btngroup-btn btn-success btn-animation" value="TryAgain" />
                 <?php else : ?>
                     <span>Busted! You have no money left.</span>
                 <?php endif; ?>
-                <input type="submit" name="reset" class="btngroup-btn btn-danger" value="Reset" />
+                <input type="submit" name="reset" class="btngroup-btn btn-danger btn-animation" value="Reset" />
             <?php else : ?>
-                <input type="submit" name="hit" class="btngroup-btn btn-primary" value="Hit" />
-                <input type="submit" name="stand" class="btngroup-btn btn-primary" value="Stand" />
+                <input type="submit" name="hit" class="btngroup-btn btn-primary btn-animation" value="Hit" />
+                <input type="submit" name="stand" class="btngroup-btn btn-primary btn-animation" value="Stand" />
             <?php endif; ?>
         </form>
         <h1 class="text-center"><small>$<?= $game->get_money() ?>
@@ -82,13 +82,16 @@ $game->setup();
         </h1>
 
     <?php else : ?>
+        <br />
+        <br />
         <form method="post" class="btngroup popup-bet">
             <input type="text" name="blackjack" value="1" class="hidden" />
             <h1>Place a bet</h1>
-            <input type="number" name="bet" value="0" min="0" max="<?= $game->get_money() ?>" />
+            <p>Max $<?= $game->get_money() ?></p>
+            <input type="number" name="bet" value="<?= $game->get_previous_bet() ?>" min="1" max="<?= $game->get_money() ?>" />
             <br />
             <br />
-            <input type="submit" class="btngroup-btn btn-primary" value="Bet!" />
+            <input type="submit" class="btngroup-btn btn-primary btn-animation" value="Bet!" />
         </form>
     <?php endif; ?>
 </div>

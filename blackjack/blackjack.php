@@ -12,6 +12,7 @@ class Blackjack {
     function setup() {
         if ($_POST["tryagain"]) {
             unset($_SESSION["used_cards"]);
+            $_SESSION["last_bet"] = $_SESSION["bet"];
             unset($_SESSION["bet"]);
             unset($_POST["tryagain"]);
         }
@@ -24,6 +25,10 @@ class Blackjack {
         if ($_POST["reset"]) {
             session_destroy();
             session_start();
+        }
+
+        if (!isset($_SESSION["last_bet"])) {
+            $_SESSION["last_bet"] = 0;
         }
 
         if (!isset($_SESSION["score_cpu"])) {
@@ -195,5 +200,9 @@ class Blackjack {
 
     function get_bet() {
         return $_SESSION["bet"];
+    }
+
+    function get_previous_bet() {
+        return $_SESSION["last_bet"];
     }
 }
