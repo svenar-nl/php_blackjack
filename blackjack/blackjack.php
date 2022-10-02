@@ -5,12 +5,20 @@ class Blackjack {
     private $cards = array("2" => 2, "3" => 3, "4" => 4, "5" => 5, "6" => 6, "7" => 7, "8" => 8, "9" => 9, "10" => 10, "J" => 10, "Q" => 10, "K" => 10, "A" => 11);
     private $types = array("C", "D", "H", "S");
     private $gameEnded = false;
+    private $gameStateMessageLevel = "";
     private $gameStateMessage = "";
+    private $winMultiplier = 2.0;
 
     function setup() {
         if ($_POST["tryagain"]) {
             unset($_SESSION["used_cards"]);
+            unset($_SESSION["bet"]);
             unset($_POST["tryagain"]);
+        }
+
+        if (isset($_POST["bet"])) {
+            $_SESSION["bet"] = intval($_POST["bet"]);
+            unset($_POST["bet"]);
         }
 
         if ($_POST["reset"]) {
@@ -23,6 +31,10 @@ class Blackjack {
         }
         if (!isset($_SESSION["score_plr"])) {
             $_SESSION["score_plr"] = 0;
+        }
+
+        if (!isset($_SESSION["money"])) {
+            $_SESSION["money"] = 1000;
         }
 
         if (!isset($_SESSION["used_cards"])) {
@@ -51,13 +63,16 @@ class Blackjack {
             }
 
             if ($this->calculate_card_deck($_SESSION["deck_player"]) == $this->calculate_card_deck($_SESSION["deck_computer"])) {
+                $this->gameStateMessageLevel = "info";
                 $this->gameStateMessage = "Tie game";
                 $this->save_score(false, false);
                 $this->gameEnded = true;
             }
 
             if (($this->calculate_card_deck($_SESSION["deck_computer"]) > $this->calculate_card_deck($_SESSION["deck_player"])) && $this->gameEnded != true) {
-                $this->gameStateMessage = "You lost, the computer won";
+                $this->gameStateMessageLevel = "warning";
+                $this->gameStateMessage = "Dealer won!";
+                $_SESSION["money"] -= $_SESSION["bet"];
                 $this->save_score(true, false);
                 $this->gameEnded = true;
             }
@@ -133,17 +148,22 @@ class Blackjack {
     function check_winner($player, $computer) {
         if ($this->gameEnded != true) {
             if ($this->calculate_card_deck($player) == 21 && $this->calculate_card_deck($computer) == 21) {
+                $this->gameStateMessageLevel = "info";
                 $this->gameStateMessage = "Tie game";
                 $this->save_score(false, false);
                 $this->gameEnded = true;
 
             } elseif ($this->calculate_card_deck($player) > 21 || $this->calculate_card_deck($computer) == 21) {
-                $this->gameStateMessage = "You lost, the computer won";
+                $this->gameStateMessageLevel = "warning";
+                $this->gameStateMessage = "Dealer won!";
+                $_SESSION["money"] -= $_SESSION["bet"];
                 $this->save_score(true, false);
                 $this->gameEnded = true;
 
             } elseif ($this->calculate_card_deck($computer) > 21 || $this->calculate_card_deck($player) == 21) {
-                $this->gameStateMessage = "You won, the computer lost";
+                $this->gameStateMessageLevel = "success";
+                $this->gameStateMessage = "You won!";
+                $_SESSION["money"] += $_SESSION["bet"] * $this->winMultiplier;
                 $this->save_score(false, true);
                 $this->gameEnded = true;
 
@@ -157,7 +177,23 @@ class Blackjack {
         return $this->gameEnded;
     }
 
+    function get_game_state_message_level() {
+        return $this->gameStateMessageLevel;
+    }
+
     function get_game_state_message() {
         return $this->gameStateMessage;
+    }
+
+    function get_money() {
+        return $_SESSION["money"];
+    }
+
+    function has_placed_bet() {
+        return isset($_SESSION["bet"]);
+    }
+
+    function get_bet() {
+        return $_SESSION["bet"];
     }
 }
